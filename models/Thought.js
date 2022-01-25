@@ -7,34 +7,36 @@ const thoughtSchema = new Schema(
             type: String,
             required: true,
             min_length: 1,
-            max_length: 180,
+            max_length: 280,
         },
         createdAt: {
             type: Date,
-            default: Date.now(),
-            // NEED ASSISTANCE HERE
-            // Use a getter method to format the timestamp on query
-            get: formatTime
+            default: Date.now,
+            get: Date.toLocaleString('en-US'),
+
         },
         username: {
             type: String,
             required: true,
         },
         reactions: [reactionSchema],
-        // NEED ASSISTANCE HERE
-        // Use a getter method to format the timestamp on query
     },
     {
         toJSON: {
             virtuals: true,
+            // What does getters do?
+            getters: true,
         },
+        // What does id false do?
         id: false,
     }
 )
 
-function formatTime(date) {
+thoughtSchema.virtual('reactionCount').get(function () {
+    return this.reactions.length;
+});
 
-}
+
 
 const Thought = model('thought ', thoughtSchema);
 

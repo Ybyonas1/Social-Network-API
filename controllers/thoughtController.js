@@ -55,7 +55,7 @@ module.exports = {
     //             !thought
     //                 ? res.status(404).json({ message: 'No thought with that ID' })
     //                 // I THINK =>  : Student.deleteMany({ _id: { $in: user.thoughts } })
-    //                 : Student.deleteMany({ _id: { what goes in here? } })
+    //                 : User.deleteMany({ _id: { what goes in here ? } })
     //         )
     //         .then(() => res.json({ message: 'thought has been deleted by _id!' }))
     //         .catch((err) => res.status(500).json(err));
@@ -69,14 +69,14 @@ module.exports = {
             // Do I need these? What do they do?
             { runValidators: true, new: true }
         )
-        .then((thought) =>
-        !thought
-          ? res
-              .status(404)
-              .json({ message: 'No thought found with that ID :(' })
-          : res.json(thought)
-      )
-      .catch((err) => res.status(500).json(err));
+            .then((thought) =>
+                !thought
+                    ? res
+                        .status(404)
+                        .json({ message: 'No thought found with that ID :(' })
+                    : res.json(thought)
+            )
+            .catch((err) => res.status(500).json(err));
     },
 
     // Remove a reaction by the reactions Id
@@ -87,13 +87,13 @@ module.exports = {
             // Do I need these? What do they do?
             { runValidators: true, new: true }
         )
-        .then((thought) =>
-        !thought
-          ? res
-              .status(404)
-              .json({ message: 'No thought found with that ID :(' })
-          : res.json(thought)
-      )
-      .catch((err) => res.status(500).json(err));
+            .then((thought) =>
+                !thought
+                    ? res
+                        .status(404)
+                        .json({ message: 'No thought found with that ID :(' })
+                    : res.json(thought)
+            )
+            .catch((err) => res.status(500).json(err));
     }
 };

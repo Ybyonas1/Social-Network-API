@@ -17,12 +17,18 @@ const reactionSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: Date.now(),
-            // NEED HELP HERE
-            // Use a getter method to format the timestamp on query
-            get: formatTime
-        },
+            default: Date.now,
+            get: Date.toLocaleString('en-US'),
 
+        },
+    },
+    {
+        toJSON: {
+            // What does getters do?
+            getters: true,
+        },
+        // What does id false do?
+        id: false
     }
 )
 
