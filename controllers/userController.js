@@ -48,17 +48,17 @@ module.exports = {
     },
 
     // Delete user by its _id
-    // deleteUser(req, res) {
-    //     User.findOneAndDelete({ _id: req.params.userId })
-    //     then((user) =>
-    //         !user
-    //             ? res.status(404).json({ message: "No user with that ID" })
-    //             // BONUS: Remove a user's associated thoughts when deleted.
-    //             : Thought.deleteMany({ _id: { What do I put here...user.thoughts } })
-    //     )
-    //         .then(() => res.json({ message: 'user and users thoughts? deleted!' }))
-    //         .catch((err) => res.status(500).json(err));
-    // },
+    deleteUser(req, res) {
+        User.findOneAndDelete({ _id: req.params.userId })
+            .then((user) =>
+                !user
+                    ? res.status(404).json({ message: "No user with that ID" })
+                    // BONUS: Remove a user's associated thoughts when deleted.
+                    : Thought.deleteMany({ username: user.username })
+            )
+            .then(() => res.json({ message: 'user and users thoughts? deleted!' }))
+            .catch((err) => res.status(500).json(err));
+    },
 
 
     // Add a new friend to a user's friend list
