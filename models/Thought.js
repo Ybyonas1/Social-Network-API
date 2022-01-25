@@ -12,17 +12,20 @@ const thoughtSchema = new Schema(
         createdAt: {
             type: Date,
             default: Date.now(),
+            // NEED ASSISTANCE HERE
+            // Use a getter method to format the timestamp on query
             get: formatTime
         },
         username: {
             type: String,
             required: true,
         },
-        reactions: [reactionSchema], s
-        // Use a getter method to format the timestamp on queryß
+        reactions: [reactionSchema],
+        // NEED ASSISTANCE HERE
+        // Use a getter method to format the timestamp on query
     },
     {
-        toJSON : {
+        toJSON: {
             virtuals: true,
         },
         id: false,
@@ -33,5 +36,6 @@ function formatTime(date) {
 
 }
 
+const Thought = model('thought ', thoughtSchema);
 
 module.exports = Thought;
