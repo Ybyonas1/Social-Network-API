@@ -64,16 +64,15 @@ module.exports = {
     // Add a new friend to a user's friend list
     addFriend(req, res) {
         User.findOneAndUpdate(
-            { _id: req.params.userId },
-            { $addToSet: { friends: req.body } },
-            // Do I need these? What do they do?
+            { _id: req.params.user },
+            { $addToSet: { friends: req.params.friendId } },
             { runValidators: true, new: true }
         )
             .then((user) =>
                 !user
                     ? res
                         .status(404)
-                        .json({ message: 'No user found with that ID :(' })
+                        .json({ message: 'No user found with that ID' })
                     : res.json(user)
             )
             .catch((err) => res.status(500).json(err));
@@ -81,17 +80,16 @@ module.exports = {
 
     // Remove a friend from a users friend list
     removeFriend(req, res) {
-        User.findOneAndDelete(
-            { _id: req.params.userId },
-            { $pull: { reaction: { reactionId: req.params.reactionId } } },
-            // Do I need these? What do they do?
-            { runValidators: true, new: true }
+        User.findOneAndUpdate(
+            { _id: req.params.user },
+            { $pull: { friends: req.params.friendId } },
+            { new: true }
         )
             .then((user) =>
                 !user
                     ? res
                         .status(404)
-                        .json({ message: 'No user found with that ID :(' })
+                        .json({ message: 'No user found with that ID' })
                     : res.json(user)
             )
             .catch((err) => res.status(500).json(err));

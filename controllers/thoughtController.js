@@ -25,7 +25,15 @@ module.exports = {
     //** (don't forget to push the created thought's _id to the associated user's thoughts array field) **
     createThoughts(req, res) {
         Thought.create(req.body)
-            .then((thought) => res.json(thought))
+            .then(thought => {
+                return User.findOneAndUpdate(
+                    { _id: req.body.userId },
+                    { $addToSet: { thoughts: thought._id } },
+                    { new: true }
+                )
+            })
+
+            .then(() => res.json({ message: 'Thought added!' }))
             .catch((err) => {
                 console.log(err);
                 return res.status(500).json(err);
@@ -37,8 +45,7 @@ module.exports = {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
             { $set: req.body },
-            // Do I need these? What do they do?
-            { runValidators: true, new: true }
+            { new: true }
         )
             .then((thought) =>
                 !thought
@@ -49,25 +56,24 @@ module.exports = {
     },
 
     // Delete a thought by its _id
-    // deleteThought(req, res) {
-    //     Thought.findOneAndDelete({ _id: req.params.thoughtId })
-    //         .then((thought) =>
-    //             !thought
-    //                 ? res.status(404).json({ message: 'No thought with that ID' })
-    //                 // I THINK =>  : Student.deleteMany({ _id: { $in: user.thoughts } })
-    //                 : User.deleteMany({ _id: { what goes in here ? } })
-    //         )
-    //         .then(() => res.json({ message: 'thought has been deleted by _id!' }))
-    //         .catch((err) => res.status(500).json(err));
-    // },
+    deleteThought(req, res) {
+        Thought.findOneAndDelete({ _id: req.params.thoughtId })
+            // .then((thought) =>
+            //     !thought
+            //         ? res.status(404).json({ message: 'No thought with that ID' })
+            //         // I THINK =>  : Student.deleteMany({ _id: { $in: user.thoughts } })
+            //         : User.deleteMany({ _id: { what goes in here ? } })
+            // )
+            .then(() => res.json({ message: 'thought has been deleted by _id!' }))
+            .catch((err) => res.status(500).json(err));
+    },
 
     // Create a thought by its _id
-    addReation(req, res) {
+    addReaction(req, res) {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
-            { $addToSet: { reaction: req.body } },
-            // Do I need these? What do they do?
-            { runValidators: true, new: true }
+            { $push: { reactions: req.body } },
+            { new: true, runValidators: true }
         )
             .then((thought) =>
                 !thought
@@ -80,12 +86,11 @@ module.exports = {
     },
 
     // Remove a reaction by the reactions Id
-    removeReation(req, res) {
-        Thought.findOneAndDelete(
+    removeReaction(req, res) {
+        Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
-            { $pull: { reaction: { reactionId: req.params.reactionId } } },
-            // Do I need these? What do they do?
-            { runValidators: true, new: true }
+            { $pull: { reactions: { reactionId: req.params.reactionId } } },
+            { new: true }
         )
             .then((thought) =>
                 !thought
