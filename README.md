@@ -3,50 +3,36 @@
 ### by: Yonas Woldemichael
 _
 
-## Project 2
-In Project 2 we were assigned the task of building a full-stack web application using the MVC paradigm, requiring that we create our own serverside API, connect to a database, and to also add user authentication.
+## Social Network API
+In this assignment I was assigned with building an API for a social network web application.
 _
 
 ## Table of Contents
  - [Description](#description)
- - [Installation](#installation)
  - [Visuals](#visuals)
- - [Links to Site](#Links_to_Site)
  - [Contributors](#Contributors)
 
  ## Description
-CYM Books is an eccommerce webiste that allows you to shop around a list of various software developer books. Categories are divided by languages at the moment, and provides the client up to 3 options to choose from: Python, Javascript & C++. The books are all priced and display they author of the book as well.
+Build an API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list. You’ll use Express.js for routing, a MongoDB database, and the Mongoose ODM. In addition to using the [Express.js](https://www.npmjs.com/package/express) and [Mongoose](https://www.npmjs.com/package/mongoose) packages, you may also optionally use a JavaScript date library of your choice or the native JavaScript `Date` object to format timestamps.No seed data is provided, so you’ll need to create your own data using Insomnia after you’ve created your API.
 
 
  ## Apps Used
-- Handlebars.js
-- Node.js & Express.js
-- MySQL & Sequelize ORM
-- Both GET and POSt routs were used for retrieving data,
-- MVC folder structure
-- Authentiction (express-session & cookies)
-- Anime.js
+- Express.js will be used
+- MongoDB will be used
+- Javascript
+- Both GET, PUT, DELETE and POST routes were used for retrieving data,
+
 
 
  ## Visuals
-_
-image should be placed here
-![Spongebob Squarepants](https://c.tenor.com/D4aKcpzBNnMAAAAC/spongebob-meme.gif)
-_
 
-# Links to Site
-To view the latest changes to the CYM Books application and get the lates work, please visit the link below.
-
-- [CYM Books](https://www.google.com)
+Here are screenshots of the Insomnia routes running
+![Get Thoughts](./18pic1.png)
+#
+![Get Users](./18pic2.png)
 
 
 # Contributors
 
- Malachi Chapman
- - [Github]()
-
- Can Pham
- - [Github]()
-
 Yonas Woldemichael
-- [Github]()
+- [Github](https://github.com/Ybyonas1/social-network-api)
