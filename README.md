@@ -35,4 +35,6 @@ Here are screenshots of the Insomnia routes running
 # Contributors
 
 Yonas Woldemichael
+- [Walkthrough video](https://drive.google.com/file/d/18Mc-Ufv8nhd4GTaIRU6xONcaOvSPfIT8/view)
+
 - [Github](https://github.com/Ybyonas1/social-network-api)
